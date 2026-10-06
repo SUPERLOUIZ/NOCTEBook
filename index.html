@@ -857,7 +857,7 @@ async function forgotPass(){const em=$('#em').value.trim();if(!em)return alert('
 const savedEm=localStorage.getItem('noc-email'),savedPw=localStorage.getItem('noc-pass');
 if(savedEm&&savedPw){document.getElementById('em').value=savedEm;document.getElementById('pw').value=savedPw;document.getElementById('remember').checked=true}
 async function enter(u){USER=u;$('#login').style.display='none';
-  const tm=await SB.from('team').select('role').eq('user_id',u.id);RO=!tm.error&&!!(tm.data&&tm.data.length);if(RO)roSetup();
+  RO=false;if(RO)roSetup();
   await load();
   if(!RO&&!items.length&&!cats.length)await starter();
   if(!RO)items.filter(i=>i.kind==='cmd'&&i.cat==='c1'&&/^s\d+$/.test(i.id)).forEach(i=>{i.kind='tpl';put('items',i)});
